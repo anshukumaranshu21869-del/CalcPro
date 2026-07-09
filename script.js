@@ -1,3 +1,5 @@
+const buttonSound = new Audio("click.mp3");
+buttonSound.volume = 0.35;
 const expressionEl = document.getElementById("expression");
 const resultEl = document.getElementById("result");
 const historyLineEl = document.getElementById("historyLine");
@@ -147,6 +149,8 @@ function handleScientific(func) {
 
 keys.forEach((key) => {
   key.addEventListener("click", () => {
+    buttonSound.currentTime = 0;
+buttonSound.play().catch(() => {});
     const value = key.dataset.value;
     const action = key.dataset.action;
     const func = key.dataset.func;
