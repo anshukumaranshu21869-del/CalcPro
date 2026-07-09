@@ -714,3 +714,28 @@ body {
   border-radius: 50%;
   pointer-events: none;
 }
+/* Step 5: Premium smooth font upgrade */
+
+body,
+button,
+input,
+select {
+  font-family: "Inter", "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.result {
+  font-size: 2.45rem;
+  letter-spacing: -1px;
+}
+
+.expression {
+  letter-spacing: -0.3px;
+}
+
+.key,
+.mini-btn,
+.tab {
+  letter-spacing: -0.2px;
+}
