@@ -739,3 +739,109 @@ select {
 .tab {
   letter-spacing: -0.2px;
 }
+/* ================================
+   STEP 6 : Premium Display Upgrade
+================================ */
+
+.display-box{
+    position: relative;
+    overflow: hidden;
+    transition: .35s ease;
+    border-radius:32px;
+}
+
+/* Soft animated light */
+.display-box::before{
+    content:"";
+    position:absolute;
+    top:-80%;
+    left:-35%;
+    width:170%;
+    height:170%;
+    background:linear-gradient(
+        120deg,
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.08),
+        transparent
+    );
+    transform:rotate(-18deg);
+    animation:displayLight 5s linear infinite;
+}
+
+@keyframes displayLight{
+
+    0%{
+        left:-120%;
+    }
+
+    100%{
+        left:120%;
+    }
+
+}
+
+/* Result Number */
+
+.result{
+
+    font-size:3rem;
+    font-weight:900;
+
+    color:#ffffff;
+
+    text-shadow:
+    0 0 12px rgba(255,255,255,.20);
+
+    transition:
+    transform .15s ease,
+    opacity .15s ease;
+
+}
+
+/* Expression */
+
+.expression{
+
+    font-size:1.25rem;
+
+    color:rgba(255,255,255,.82);
+
+}
+
+/* Display Glow */
+
+.display-box:hover{
+
+    box-shadow:
+    0 0 20px rgba(47,141,245,.35),
+    0 0 60px rgba(47,141,245,.22);
+
+}
+
+/* Typing Animation */
+
+.result.pop{
+
+    animation:numberPop .15s ease;
+
+}
+
+@keyframes numberPop{
+
+    0%{
+
+        transform:scale(.94);
+
+        opacity:.6;
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
