@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CalcPro - premium advanced calculator with scientific mode, history, memory and unit converter." />
+
+  <title>CalcPro – Advanced Calculator</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="app">
+    <section class="calculator" aria-label="CalcPro Advanced Calculator">
+
+      <header class="top-bar">
+        <div>
+          <h1>CalcPro</h1>
+          <p>Advanced Smart Calculator</p>
+        </div>
+
+        <button class="theme-btn" id="themeToggle" aria-label="Change theme">
+          🌙
+        </button>
+      </header>
+
+      <section class="display-box" aria-live="polite">
+        <div class="history-line" id="historyLine">Ready</div>
+        <div class="expression" id="expression">0</div>
+        <div class="result" id="result">0</div>
+      </section>
+
+      <nav class="mode-tabs" aria-label="Calculator modes">
+        <button class="tab active" data-mode="basic">Basic</button>
+        <button class="tab" data-mode="scientific">Scientific</button>
+        <button class="tab" data-mode="converter">Converter</button>
+        <button class="tab" data-mode="history">History</button>
+      </nav>
+
+      <section class="memory-row" aria-label="Memory controls">
+        <button class="mini-btn" data-memory="clear">MC</button>
+        <button class="mini-btn" data-memory="recall">MR</button>
+        <button class="mini-btn" data-memory="add">M+</button>
+        <button class="mini-btn" data-memory="subtract">M−</button>
+      </section>
+
+      <section class="panel active" id="basicPanel">
+        <div class="keys basic-keys">
+          <button class="key danger" data-action="clear">AC</button>
+          <button class="key" data-action="percent">%</button>
+          <button class="key" data-action="delete">⌫</button>
+          <button class="key operator" data-value="/">÷</button>
+
+          <button class="key number" data-value="7">7</button>
+          <button class="key number" data-value="8">8</button>
+          <button class="key number" data-value="9">9</button>
+          <button class="key operator" data-value="*">×</button>
+
+          <button class="key number" data-value="4">4</button>
+          <button class="key number" data-value="5">5</button>
+          <button class="key number" data-value="6">6</button>
+          <button class="key operator" data-value="-">−</button>
+
+          <button class="key number" data-value="1">1</button>
+          <button class="key number" data-value="2">2</button>
+          <button class="key number" data-value="3">3</button>
+          <button class="key operator" data-value="+">+</button>
+
+          <button class="key number" data-value="00">00</button>
+          <button class="key number" data-value="0">0</button>
+          <button class="key number" data-value=".">.</button>
+          <button class="key equal" data-action="calculate">=</button>
+        </div>
+      </section>
+
+      <section class="panel" id="scientificPanel">
+        <div class="keys scientific-keys">
+          <button class="key sci" data-func="sqrt">√</button>
+          <button class="key sci" data-func="square">x²</button>
+          <button class="key sci" data-func="cube">x³</button>
+          <button class="key sci" data-value="^">xʸ</button>
+
+          <button class="key sci" data-func="sin">sin</button>
+          <button class="key sci" data-func="cos">cos</button>
+          <button class="key sci" data-func="tan">tan</button>
+          <button class="key sci" data-func="log">log</button>
+
+          <button class="key sci" data-func="ln">ln</button>
+          <button class="key sci" data-value="(">(</button>
+          <button class="key sci" data-value=")">)</button>
+          <button class="key sci" data-func="factorial">n!</button>
+
+          <button class="key sci" data-value="3.141592653589793">π</button>
+          <button class="key sci" data-value="2.718281828459045">e</button>
+          <button class="key danger" data-action="clear">AC</button>
+          <button class="key equal" data-action="calculate">=</button>
+        </div>
+      </section>
+
+      <section class="panel converter-panel" id="converterPanel">
+        <h2>Quick Unit Converter</h2>
+
+        <label>
+          Value
+          <input type="number" id="convertInput" placeholder="Enter value" />
+        </label>
+
+        <label>
+          Convert
+          <select id="convertType">
+            <option value="cmToM">Centimeter → Meter</option>
+            <option value="mToCm">Meter → Centimeter</option>
+            <option value="kgToG">Kilogram → Gram</option>
+            <option value="gToKg">Gram → Kilogram</option>
+            <option value="kmToMile">Kilometer → Mile</option>
+            <option value="mileToKm">Mile → Kilometer</option>
+          </select>
+        </label>
+
+        <button class="convert-btn" id="convertBtn">Convert</button>
+
+        <div class="convert-result" id="convertResult">Result will appear here</div>
+      </section>
+
+      <section class="panel history-panel" id="historyPanel">
+        <div class="history-header">
+          <h2>Calculation History</h2>
+          <button id="clearHistory">Clear</button>
+        </div>
+
+        <ul id="historyList">
+          <li>No history yet</li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        Made for speed, study and daily use.
+      </footer>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
