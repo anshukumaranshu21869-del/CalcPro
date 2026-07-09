@@ -367,3 +367,23 @@ body {
     min-height: 50px;
   }
 }
+.result,
+.expression {
+  transition: transform 0.12s ease, opacity 0.12s ease;
+  will-change: transform, opacity;
+}
+
+.result.pop,
+.expression.pop {
+  transform: scale(1.035);
+  opacity: 0.92;
+}
+
+.key {
+  transition: transform 0.08s ease, background 0.18s ease;
+}
+
+.key:active,
+.mini-btn:active {
+  transform: scale(0.94);
+}
