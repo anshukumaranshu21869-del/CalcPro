@@ -1,5 +1,11 @@
 const buttonSound = new Audio("click.mp3");
 buttonSound.volume = 0.35;
+
+function playButtonSound() {
+  buttonSound.currentTime = 0;
+  buttonSound.play().catch(() => {});
+}
+
 const expressionEl = document.getElementById("expression");
 const resultEl = document.getElementById("result");
 const historyLineEl = document.getElementById("historyLine");
@@ -22,9 +28,26 @@ let expression = "";
 let memoryValue = 0;
 let history = [];
 
+function animateDisplay() {
+  expressionEl.classList.remove("pop");
+  resultEl.classList.remove("pop");
+
+  void expressionEl.offsetWidth;
+  void resultEl.offsetWidth;
+
+  expressionEl.classList.add("pop");
+  resultEl.classList.add("pop");
+
+  setTimeout(() => {
+    expressionEl.classList.remove("pop");
+    resultEl.classList.remove("pop");
+  }, 120);
+}
+
 function updateDisplay(result = "0") {
   expressionEl.textContent = expression || "0";
   resultEl.textContent = result;
+  animateDisplay();
 }
 
 function safeCalculate(exp) {
@@ -37,9 +60,7 @@ function safeCalculate(exp) {
       .replace(/−/g, "-")
       .replace(/\^/g, "**");
 
-    if (!/^[0-9+\-*/().% **]+$/.test(cleanExp)) {
-      return "Error";
-    }
+    if (!/^[0-9+\-*/().% **]+$/.test(cleanExp)) return "Error";
 
     const answer = Function(`"use strict"; return (${cleanExp})`)();
 
@@ -56,7 +77,6 @@ function addToHistory(exp, ans) {
 
   history.unshift(`${exp} = ${ans}`);
   history = history.slice(0, 20);
-
   renderHistory();
 }
 
@@ -77,6 +97,7 @@ function renderHistory() {
 
 function calculate() {
   const answer = safeCalculate(expression);
+
   updateDisplay(answer);
   historyLineEl.textContent = expression || "Ready";
   addToHistory(expression, answer);
@@ -120,9 +141,9 @@ function handleScientific(func) {
   if (func === "sqrt") answer = Math.sqrt(value);
   if (func === "square") answer = value ** 2;
   if (func === "cube") answer = value ** 3;
-  if (func === "sin") answer = Math.sin(value * Math.PI / 180);
-  if (func === "cos") answer = Math.cos(value * Math.PI / 180);
-  if (func === "tan") answer = Math.tan(value * Math.PI / 180);
+  if (func === "sin") answer = Math.sin((value * Math.PI) / 180);
+  if (func === "cos") answer = Math.cos((value * Math.PI) / 180);
+  if (func === "tan") answer = Math.tan((value * Math.PI) / 180);
   if (func === "log") answer = Math.log10(value);
   if (func === "ln") answer = Math.log(value);
 
@@ -141,6 +162,7 @@ function handleScientific(func) {
   }
 
   answer = Number(answer.toFixed(10)).toString();
+
   addToHistory(`${func}(${expression})`, answer);
   historyLineEl.textContent = `${func}(${expression})`;
   expression = answer;
@@ -149,8 +171,8 @@ function handleScientific(func) {
 
 keys.forEach((key) => {
   key.addEventListener("click", () => {
-    buttonSound.currentTime = 0;
-buttonSound.play().catch(() => {});
+    playButtonSound();
+
     const value = key.dataset.value;
     const action = key.dataset.action;
     const func = key.dataset.func;
@@ -160,18 +182,15 @@ buttonSound.play().catch(() => {});
       updateDisplay();
     }
 
-    if (action) {
-      handleAction(action);
-    }
-
-    if (func) {
-      handleScientific(func);
-    }
+    if (action) handleAction(action);
+    if (func) handleScientific(func);
   });
 });
 
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
+    playButtonSound();
+
     const mode = tab.dataset.mode;
 
     tabs.forEach((t) => t.classList.remove("active"));
@@ -184,6 +203,8 @@ tabs.forEach((tab) => {
 
 memoryBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
+    playButtonSound();
+
     const type = btn.dataset.memory;
     const currentValue = Number(safeCalculate(expression)) || 0;
 
@@ -198,6 +219,8 @@ memoryBtns.forEach((btn) => {
 });
 
 convertBtn.addEventListener("click", () => {
+  playButtonSound();
+
   const value = Number(convertInput.value);
   const type = convertType.value;
 
@@ -219,11 +242,13 @@ convertBtn.addEventListener("click", () => {
 });
 
 clearHistoryBtn.addEventListener("click", () => {
+  playButtonSound();
   history = [];
   renderHistory();
 });
 
 themeToggle.addEventListener("click", () => {
+  playButtonSound();
   document.body.classList.toggle("light");
   themeToggle.textContent = document.body.classList.contains("light") ? "☀️" : "🌙";
 });
